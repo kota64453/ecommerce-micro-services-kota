@@ -1,0 +1,74 @@
+spring:
+  application:
+    name: API-GATEWAY-SERVICE
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: user-service-cb
+                fallbackUri: forward:/fallback/user
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: auth-service-cb
+                fallbackUri: forward:/fallback/auth
+        - id: product-service
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/products/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: product-service-cb
+                fallbackUri: forward:/fallback/product
+
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/api/orders/**
+          filters:           
+            - name: CircuitBreaker
+              args:
+                name: order-service
+                fallbackUri: forward:/fallback/order
+
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/api/payments/**
+          filters:            
+            - name: CircuitBreaker
+              args:
+                name: payment-service
+                fallbackUri: forward:/fallback/payment
+
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/notifications/**
+          
+
+eureka:
+  instance:
+    hostname: eureka-service
+  client:
+    service-url:
+      defaultZone: http://eureka-service/eureka/
+jwt:
+  secret: a2V5LWlzLWEtc2VjcmV0LWZvci1obGQtand0LXNpZ25pbmctdHdvLWh1bmRyZWQtYml0cy1sb25nLXNlY3JldA==
+  expiration: 86400000
+
+logging:
+  level:
+    com.ecommerce.gateway: DEBUG
+    org.springframework.cloud.gateway: INFO

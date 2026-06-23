@@ -1,0 +1,28 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: product-service
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: ecommerce_products
+      auto-index-creation: true
+
+    redis:
+      host: localhost
+      port: 6379
+
+eureka:
+  instance:
+    hostname: eureka-service
+  client:
+    service-url:
+      defaultZone: http://eureka-service/eureka/
+
+logging:
+  level:
+    com.ecommerce.product: DEBUG

@@ -1,0 +1,36 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: notification-service
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_USERNAME:fullstackjava.codes@gmail.com}
+    password: ${GMAIL_APP_PASSWORD:Abcd@1234}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+eureka:
+  instance:
+    hostname: eureka-service
+
+  client:
+    service-url:
+      defaultZone: http://eureka-service/eureka/
+
+logging:
+  level:
+    com.ecommerce.notification: DEBUG
