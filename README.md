@@ -98,7 +98,7 @@ This project follows a **microservices architecture** where each service is inde
 
 | Layer | Technology |
 |-------|-----------|
-| Language | Java 21 |
+| Language | Java 25 |
 | Framework | Spring Boot 3.x |
 | Service Registry | Spring Cloud Netflix Eureka |
 | API Gateway | Spring Cloud Gateway (WebFlux) |
